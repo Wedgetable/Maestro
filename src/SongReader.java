@@ -1,5 +1,5 @@
 /**
- * Created by Wedge on 9/26/2015.
+ * Created by Wedge on 9/26/2015 AND THEN MODIFIED.
  */
 import org.jfugue.midi.MidiFileManager;
 import org.jfugue.player.Player;
@@ -23,7 +23,8 @@ public class SongReader {
 
         Pattern p2 = new Pattern(MidiFileManager.loadPatternFromMidi(new File("decisive_battle.mid")));
 
-        String stringVar = p2.toString().replaceAll("R/\\d\\.\\d+E-\\d+", "").replaceAll("(a\\d+)?(d\\d+)?\\b", "");
+        String stringVar = p2.toString().replaceAll("R/\\d\\.\\d+E-\\d+", "")   // Removing very short rests
+                                        .replaceAll("(a\\d+)?(d\\d+)?\\b", ""); // Removing velocity information
 
         System.out.println("stringVar from p2: " + stringVar);
 
@@ -49,11 +50,10 @@ public class SongReader {
         String noteLenStr = "";
 
         char[] charArr = new char[]{'w', 'h', 'q', 'i', 's', 't', 'x', 'o'};
-        int[] intArr = new int[8];
 
         int numChars;
 
-        for (int i = 0; i < intArr.length; ++i) {
+        for (int i = 0; i < charArr.length; ++i) {
             numChars = ((Double) (num * Math.pow(2, i))).intValue();
             num -= numChars / Math.pow(2, i);
             for (int j = 0; j < numChars; ++j) {
